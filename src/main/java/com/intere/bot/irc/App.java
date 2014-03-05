@@ -34,7 +34,7 @@ public class App implements IRCEventListener
 		 */
 		String channel = "irc.freenode.net";
 		// String channel = "irc.eversible.com";
-		
+
 		Session session = manager.requestConnection(channel);
  
 		/*
@@ -54,7 +54,7 @@ public class App implements IRCEventListener
 	{
 		if (e.getType() == Type.CONNECT_COMPLETE)
 		{
-			e.getSession().join("#orbitdelmundo");
+			e.getSession().join("#orbittheworld");
  
 		}
 		else if (e.getType() == Type.CHANNEL_MESSAGE)
