@@ -32,7 +32,10 @@ public class App implements IRCEventListener
 		 * The Session is the main way users will interact with this library and IRC
 		 * networks
 		 */
-		Session session = manager.requestConnection("irc.eversible.com");
+		String channel = "irc.freenode.net";
+		// String channel = "irc.eversible.com";
+		
+		Session session = manager.requestConnection(channel);
  
 		/*
 		 * JerkLib fires IRCEvents to notify users of the lib of incoming events
