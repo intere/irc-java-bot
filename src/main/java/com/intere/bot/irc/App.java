@@ -7,6 +7,8 @@ import net.sf.jerklib.events.*;
 import net.sf.jerklib.events.IRCEvent.Type;
 import net.sf.jerklib.listeners.IRCEventListener;
 
+import com.intere.bot.irc.actions.*;
+
 /**
  * Hello world!
  *
@@ -14,10 +16,11 @@ import net.sf.jerklib.listeners.IRCEventListener;
 public class App implements IRCEventListener
 {
 	private ConnectionManager manager;
+	private BotActionFactory factory = new BotActionFactory();
 
 	public App() {
 
-		//public Profile(String name, String realName, String nick, String secondNick, String thirdNick)
+		// TODO - autowire this stuff:
 		Profile profile = new Profile("Robotnik", "Dr. Robotnik", "robotnik", "robot_nik", "dr_robot_nik");
 
 		/*
@@ -26,6 +29,7 @@ public class App implements IRCEventListener
 		manager = new ConnectionManager(profile);
 
 
+		// TODO - Autowire the channel name.
 		/*
 		 * One instance of ConnectionManager can connect to many IRC networks.
 		 * ConnectionManager#requestConnection(String) will return a Session object.
@@ -61,6 +65,11 @@ public class App implements IRCEventListener
 		{
 			MessageEvent me = (MessageEvent) e;
 			System.out.println("<" + me.getNick() + ">"+ ":" + me.getMessage());
+
+			BotAction action = factory.createBotAction(me);
+			if(null!=action) {
+				action.execute();
+			}
 		}
 		else if (e.getType() == Type.JOIN_COMPLETE)
 		{
